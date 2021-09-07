@@ -1,0 +1,117 @@
+﻿<Window x:Class="DiskScanner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiskScanner"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="750" Width="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Margin="5" Click="Analysis"> Анализ </Button>
+            <Button Margin="5" Click="ChangePath"  Grid.Column="1">Выбрать путь</Button>
+        </Grid>
+        <ListBox  ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="FolderList" Grid.Row="2"  Margin="5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="20"  Orientation="Horizontal">
+                        <TextBlock Text="FileSize: "></TextBlock>
+                        <TextBlock Text= "{Binding summ}"></TextBlock>
+                        <TextBlock Text="  "></TextBlock>
+                        <TextBlock Text="FilesCount: "></TextBlock>
+                        <TextBlock Text="{Binding filescount}"></TextBlock>
+                        <TextBlock Text="           "></TextBlock>
+                        <ListBox  HorizontalAlignment="Right"  ItemsSource="{Binding directories}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Folder:  "></TextBlock>
+                                        <TextBlock Text="{Binding Folder}"></TextBlock>
+                                        <TextBlock Text="  "></TextBlock>
+                                        <TextBlock Text="Count:  "></TextBlock>
+                                        <TextBlock Text="{Binding Count}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox  ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="ExeList" Grid.Row="2" Grid.Column="1"  Margin="5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="20"  Orientation="Horizontal">
+                        <TextBlock Text="FileSize: "></TextBlock>
+                        <TextBlock Text= "{Binding summ}"></TextBlock>
+                        <TextBlock Text="  "></TextBlock>
+                        <TextBlock Text="FilesCount: "></TextBlock>
+                        <TextBlock Text="{Binding filescount}"></TextBlock>
+                        <TextBlock Text="          "></TextBlock>
+                        <ListBox  HorizontalAlignment="Right"  ItemsSource="{Binding exe}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Extension:  "></TextBlock>
+                                        <TextBlock Text="{Binding Extension}"></TextBlock>
+                                        <TextBlock Text="  "></TextBlock>
+                                        <TextBlock Text="Count:  "></TextBlock>
+                                        <TextBlock Text="{Binding Count}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock FontSize="20"  x:Name="DirectoryPath" Grid.Row="0"></TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Margin="1">По имени папки</Button>
+            <Button Click="SortByFoldersFilesCount" Margin="1" Grid.Column="1">По Кол-ву файлов</Button>
+            <Button Click="SortByFoldersSize" Margin="1" Grid.Column="2">По размеру</Button>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Click="SortByExeFoldersName" Margin="1" >По имени расширения</Button>
+            <Button Margin="1" Grid.Column="1">По Кол-ву файлов</Button>
+            <Button Click="SortByExeFoldersSize" Margin="1" Grid.Column="2">По размеру</Button>
+        </Grid>
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Click="UploadData" Margin="5">Загрузить данные в базу данных</Button>
+            <Button Grid.Column="2" Click="GetData" Margin="5">Получить данные</Button>
+            <Button Click="OpenComparisonWindow" Grid.Column="1" Margin="5">Сравнение</Button>
+        </Grid>
+        
+    </Grid>
+</Window>
